@@ -1,0 +1,19 @@
+* {
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.link-list {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+a {
+    color: black;
+}
+
+a.active {
+    border-bottom: 2px dashed grey;
+}
