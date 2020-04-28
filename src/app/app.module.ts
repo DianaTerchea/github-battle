@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { GetProfileService } from './services/getProfile.service';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,17 +9,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-import { MainComponent } from './main/main.component';
 import { BattleComponent } from './battle/battle.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { PopularComponent } from './popular/popular.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MainComponent,
     BattleComponent,
     NavbarComponent,
     PopularComponent
@@ -28,12 +28,10 @@ import { PopularComponent } from './popular/popular.component';
     BrowserAnimationsModule,
     MaterialModule,
     MatToolbarModule,
+    HttpClientModule,
 RouterModule.forRoot([
       {
         path: '',
-        component: MainComponent},
-      {
-        path: 'home',
         component: HomeComponent},
       {
         path: 'battle',
@@ -45,7 +43,7 @@ RouterModule.forRoot([
       }
     ])
   ],
-  providers: [],
+  providers: [GetProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
