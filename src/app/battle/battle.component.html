@@ -1,1 +1,26 @@
 <app-navbar></app-navbar>
+
+<div class="wrapper">
+    <div class="content-player">
+        <h2>Player 1</h2>
+        <form [formGroup]="myForm1" (ngSubmit)="onSubmitPlayer1(myForm1)">
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" placeholder="Ex. DianaTerchea">
+            </mat-form-field>
+        </form>
+
+        <p>{{responsePlayer1}}</p>
+    </div>
+    <h1>VS</h1>
+    <div class="content-player">
+        <h2>Player 1</h2>
+        <form [formGroup]="myForm2" (ngSubmit)="onSubmitPlayer2(myForm2)">
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" placeholder="Ex. DianaTerchea">
+            </mat-form-field>
+        </form>
+        <p>{{responsePlayer2}}</p>
+    </div>
+</div>

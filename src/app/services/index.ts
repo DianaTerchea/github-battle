@@ -1,1 +1,1 @@
-export * from './get-profile.service';
+export * from './getProfile.service';

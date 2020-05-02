@@ -13,7 +13,8 @@ import { BattleComponent } from './battle/battle.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PopularComponent } from './popular/popular.component';
-
+import {ReactiveFormsModule} from '@angular/forms';
+import {User} from './models';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { PopularComponent } from './popular/popular.component';
     MaterialModule,
     MatToolbarModule,
     HttpClientModule,
+    ReactiveFormsModule,
 RouterModule.forRoot([
       {
         path: '',
