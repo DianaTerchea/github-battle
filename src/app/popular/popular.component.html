@@ -1,1 +1,21 @@
 <app-navbar></app-navbar>
+<mat-radio-group aria-labelledby="filter-repos" [ngModel]="selectedType" (change)="getRepos($event.value)">
+    <mat-radio-button value="TypeScript">TypeScript</mat-radio-button>
+    <mat-radio-button value="JavaScript">JavaScript</mat-radio-button>
+    <mat-radio-button value="C++">C++</mat-radio-button>
+    <mat-radio-button value="Java">Java</mat-radio-button>
+</mat-radio-group>
+<div *ngIf="repos?.length && !isLoading; else loadingState" class="wrapper">
+    <div *ngFor="let repo of repos" class="user">
+        <h1>#{{repos.indexOf(repo)+1}}</h1>
+        <img src={{repo.avatar}}>
+        <h1>@{{repo.owner}}</h1>
+        <a href={{repo.repoUrl}}>
+            <p>{{repo.repoUrl}}</p>
+        </a>
+        <h3>Number of forks: {{repo.forks}}</h3>
+    </div>
+</div>
+<ng-template #loadingState>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

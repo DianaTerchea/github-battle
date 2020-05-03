@@ -1,6 +1,6 @@
 import { GetProfileService } from './../services/getProfile.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { User } from '../models/user';
 @Component({
@@ -8,7 +8,7 @@ import { User } from '../models/user';
   templateUrl: './battle.component.html',
   styleUrls: ['./battle.component.scss']
 })
-export class BattleComponent implements OnInit {
+export class BattleComponent implements OnInit, OnDestroy {
   myForm1: FormGroup;
   myForm2: FormGroup;
   public player1: User = new User();
@@ -17,6 +17,7 @@ export class BattleComponent implements OnInit {
   public show2 = false;
   public winner: string;
   public showWinner = false;
+  subscription: any;
   constructor(private fb: FormBuilder, private getProfile: GetProfileService) { }
 
   ngOnInit(): void {
@@ -50,6 +51,9 @@ export class BattleComponent implements OnInit {
     err => {
      return err;
     });
+  }
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
   public battle() {
     if ( this.player1.publicRepos > this.player2.publicRepos ) {

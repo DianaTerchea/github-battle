@@ -1,3 +1,5 @@
+export type Language = 'Typescript'| 'JavaScript' | 'C++' | 'Java';
+
 export class User {
     login: string;
     id: number;
@@ -6,14 +8,11 @@ export class User {
     reposUrl: string;
     publicRepos: number;
     followers: number;
+}
 
-   /* User(userResponse: any) {
-        this.login = userResponse.login;
-        this.id = userResponse.id;
-        this.avatarUrl = userResponse.avatar_url;
-        this.htmlUrl = userResponse.html_url;
-        this.reposUrl = userResponse.repos_url;
-        this.publicRepos = userResponse.public_repos;
-        this.followers = userResponse.followers;
-    }*/
+export class Repo {
+    owner: string;
+    avatar: string;
+    repoUrl: string;
+    forks: number;
 }

@@ -1,0 +1,31 @@
+img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.wrapper {
+    margin-right: 5%;
+    margin-left: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: 90%;
+}
+
+.user {
+    width: 10%;
+    margin: 5%;
+}
+
+h1,
+h3,
+h4 {
+    font-weight: bold;
+}
+
+mat-radio-group {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-evenly;
+}

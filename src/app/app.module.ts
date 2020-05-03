@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +14,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PopularComponent } from './popular/popular.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
 import {User} from './models';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,8 +30,11 @@ import {User} from './models';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatRadioModule,
     MatToolbarModule,
     HttpClientModule,
+    FormsModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
 RouterModule.forRoot([
       {
