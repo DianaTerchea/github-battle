@@ -18,16 +18,31 @@ export class GetProfileService {
     private extractData(res: Response) {
       const body = res;
       const smth = JSON.parse(JSON.stringify(body));
-      return body || {};
+      const user = new User();
+      user.login = smth.login;
+      user.id = smth.id;
+      user.avatarUrl = smth.avatar_url;
+      user.htmlUrl = smth.html_url;
+      user.reposUrl = smth.repos_url;
+      user.publicRepos = smth.public_repos;
+      user.followers = smth.followers;
+      return user;
     }
-
+/*
     getUser(username: string): Observable<any> {
       const urlValue = `${this.api}${username}`;
       return this.http.get(urlValue).pipe(
             map(this.extractData),
             catchError(this.handleError)
           );
-  }
+  }*/
+  getUser(username: string): Observable<User> {
+    const urlValue = `${this.api}${username}`;
+    return this.http.get<any>(urlValue).pipe(
+      map(this.extractData)
+    );
+      }
+
 private handleError(err: HttpErrorResponse) {
         let errorMessage = '';
         if (err.error instanceof ErrorEvent) {

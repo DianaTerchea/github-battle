@@ -2,21 +2,7 @@ import { GetProfileService } from './../services/getProfile.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-class User {
-  username: string;
-  avatarUrl: string;
-  accountUrl: string;
-  repos: number;
-  followers: number;
-
-  User(name: string, avatar: string, account: string, repo: number, follow: number ){
-    this.username = name;
-    this.avatarUrl = avatar;
-    this.accountUrl = account;
-    this.repos = repo;
-    this.followers = follow;
-  }
-}
+import { User } from '../models/user';
 @Component({
   selector: 'app-battle',
   templateUrl: './battle.component.html',
@@ -25,8 +11,12 @@ class User {
 export class BattleComponent implements OnInit {
   myForm1: FormGroup;
   myForm2: FormGroup;
-  public responsePlayer1: any;
-  public responsePlayer2: any;
+  public player1: User = new User();
+  public player2: User = new User();
+  public show1 = false;
+  public show2 = false;
+  public winner: string;
+  public showWinner = false;
   constructor(private fb: FormBuilder, private getProfile: GetProfileService) { }
 
   ngOnInit(): void {
@@ -40,27 +30,35 @@ export class BattleComponent implements OnInit {
 
 
   onSubmitPlayer1(form: FormGroup) {
-    console.log('Username', form.value.username);
     this.getInfo(form.value.username, 'player1');
   }
 
   onSubmitPlayer2(form: FormGroup) {
-    console.log('Username', form.value.username);
     this.getInfo(form.value.username, 'player2');
   }
   public getInfo(user: string, player: string): void {
     this.getProfile.getUser(user)
-    .subscribe( data => {
-      if ( player === 'player1'){
-      this.responsePlayer1 = JSON.parse(JSON.stringify(data));
-      console.log(this.responsePlayer1);
+    .subscribe( (data: User) => {
+      if (player === 'player1'){
+        this.player1 = data;
+        this.show1 = true;
       } else {
-        this.responsePlayer2 = JSON.parse(JSON.stringify(data));
-        console.log(this.responsePlayer2);
-      }
+        this.player2 = data;
+        this.show2 = true;
+       }
     },
     err => {
      return err;
     });
+  }
+  public battle() {
+    if ( this.player1.publicRepos > this.player2.publicRepos ) {
+      this.winner = this.player1.login;
+      this.showWinner = true;
+    } else {
+      this.winner = this.player2.login;
+      this.showWinner = true;
+    }
+    console.log(this.winner);
   }
 }
