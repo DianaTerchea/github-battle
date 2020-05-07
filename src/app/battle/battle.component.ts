@@ -8,13 +8,14 @@ import { User } from '../models/user';
   templateUrl: './battle.component.html',
   styleUrls: ['./battle.component.scss']
 })
-export class BattleComponent implements OnInit, OnDestroy {
+export class BattleComponent implements OnInit {
   myForm1: FormGroup;
   myForm2: FormGroup;
   public player1: User = new User();
   public player2: User = new User();
   public show1 = false;
   public show2 = false;
+  public valid = false;
   public winner: string;
   public showWinner = false;
   subscription: any;
@@ -31,16 +32,19 @@ export class BattleComponent implements OnInit, OnDestroy {
 
 
   onSubmitPlayer1(form: FormGroup) {
-    this.getInfo(form.value.username, 'player1');
+   this.getInfo(form.value.username, 'player1');
+   this.getRepos(form.value.username, 'player1');
+   this.getStats('FIIPractic');
   }
 
   onSubmitPlayer2(form: FormGroup) {
     this.getInfo(form.value.username, 'player2');
+    this.getRepos(form.value.username, 'player2');
   }
   public getInfo(user: string, player: string): void {
     this.getProfile.getUser(user)
     .subscribe( (data: User) => {
-      if (player === 'player1'){
+      if (player === 'player1') {
         this.player1 = data;
         this.show1 = true;
       } else {
@@ -49,11 +53,28 @@ export class BattleComponent implements OnInit, OnDestroy {
        }
     },
     err => {
-     return err;
+     console.log('[Eroare]' + err);
+     this.valid  = true;
     });
   }
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  public getRepos(user: string, player: string): void {
+    this.getProfile.getRepos(user)
+    .subscribe( (data) => {
+      console.log(data);
+    },
+    err => {
+     console.log('[Eroare din getRepo]' + err);
+    });
+  }
+
+  public getStats(repo: string): void {
+    this.getProfile.getStats(repo)
+    .subscribe( (data) => {
+      console.log(data);
+    },
+    err => {
+     console.log('[Eroare din getStats]' + err);
+    });
   }
   public battle() {
     if ( this.player1.publicRepos > this.player2.publicRepos ) {

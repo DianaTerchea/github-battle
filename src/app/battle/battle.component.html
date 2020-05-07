@@ -13,6 +13,7 @@
                     <mat-label>Username</mat-label>
                     <input matInput formControlName="username" placeholder="Ex. DianaTerchea">
                 </mat-form-field>
+                <span *ngIf="valid">There is no account with this username</span>
             </form>
         </div>
         <div *ngIf="show1" class="info">
@@ -25,6 +26,7 @@
     </div>
     <h1>VS</h1>
     <div class="content">
+        <span *ngIf="valid">There is no account with this username</span>
         <h2>Player 2</h2>
         <div *ngIf="!show2" class="content-player">
             <form [formGroup]="myForm2" (ngSubmit)="onSubmitPlayer2(myForm2)">

@@ -1,3 +1,4 @@
+import { GetProfileService } from './../services/getProfile.service';
 import { MatRadioModule } from '@angular/material/radio';
 import { Repo, Language } from './../models/user';
 import { GetPopularService } from './../services/getPopular.service';
@@ -15,7 +16,7 @@ export class PopularComponent implements OnInit {
    public selectedType: Language = 'Typescript';
    public isLoading = true;
    private subscription: Subscription;
-  constructor(private getPopular: GetPopularService) { }
+  constructor(private getPopular: GetProfileService) { }
 
   ngOnInit(): void {
     this.getRepos();
