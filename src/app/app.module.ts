@@ -17,13 +17,15 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {User} from './models';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { PlayerFormComponent } from './player-form/player-form.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     BattleComponent,
     NavbarComponent,
-    PopularComponent
+    PopularComponent,
+    PlayerFormComponent
   ],
   imports: [
     BrowserModule,

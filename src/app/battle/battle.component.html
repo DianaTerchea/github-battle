@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div *ngIf="showWinner" class="winner">
+<!--<div *ngIf="showWinner" class="winner">
     <h1>Winner:
         <span>{{winner}}</span>
     </h1>
@@ -47,4 +47,14 @@
 </div>
 <div class="battle">
     <button *ngIf="show1&&show2" mat-raised-button (click)="battle()">Battle...</button>
+</div>-->
+<div class="wrapper">
+    <div class="content">
+        <h1>Player 1</h1>
+        <app-player-form></app-player-form>
+    </div>
+    <div class="content">
+        <h1>Player 2</h1>
+        <app-player-form></app-player-form>
+    </div>
 </div>

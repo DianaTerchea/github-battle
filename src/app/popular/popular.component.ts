@@ -1,7 +1,6 @@
 import { GetProfileService } from './../services/getProfile.service';
 import { MatRadioModule } from '@angular/material/radio';
 import { Repo, Language } from './../models/user';
-import { GetPopularService } from './../services/getPopular.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
