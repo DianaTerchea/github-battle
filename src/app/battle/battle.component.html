@@ -1,57 +1,9 @@
 <app-navbar></app-navbar>
-<!--<div *ngIf="showWinner" class="winner">
-    <h1>Winner:
-        <span>{{winner}}</span>
-    </h1>
-</div>
-<div class="wrapper">
-    <div class="content">
-        <h2>Player 1</h2>
-        <div *ngIf="!show1" class="content-player">
-            <form [formGroup]="myForm1" (ngSubmit)="onSubmitPlayer1(myForm1)">
-                <mat-form-field>
-                    <mat-label>Username</mat-label>
-                    <input matInput formControlName="username" placeholder="Ex. DianaTerchea">
-                </mat-form-field>
-                <span *ngIf="valid">There is no account with this username</span>
-            </form>
-        </div>
-        <div *ngIf="show1" class="info">
-            <img src={{player1.avatarUrl}}/>
-            <h3>{{player1.login}}</h3>
-            <p>Followers: {{player1.followers}}</p>
-            <p>Repos: {{player1.publicRepos}}</p>
-            <p>Profile: <a href={{player1.htmlUrl}}>{{player1.htmlUrl}}</a></p>
-        </div>
-    </div>
-    <h1>VS</h1>
-    <div class="content">
-        <span *ngIf="valid">There is no account with this username</span>
-        <h2>Player 2</h2>
-        <div *ngIf="!show2" class="content-player">
-            <form [formGroup]="myForm2" (ngSubmit)="onSubmitPlayer2(myForm2)">
-                <mat-form-field>
-                    <mat-label>Username</mat-label>
-                    <input matInput formControlName="username" placeholder="Ex. DianaTerchea">
-                </mat-form-field>
-            </form>
-        </div>
-        <div *ngIf="show2" class="info">
-            <img src={{player2.avatarUrl}}/>
-            <h3>{{player2.login}}</h3>
-            <p>Followers: {{player2.followers}}</p>
-            <p>Repos: {{player2.publicRepos}}</p>
-            <p>Profile: <a href={{player2.htmlUrl}}>{{player2.htmlUrl}}</a></p>
-        </div>
-    </div>
-</div>
-<div class="battle">
-    <button *ngIf="show1&&show2" mat-raised-button (click)="battle()">Battle...</button>
-</div>-->
 <div *ngIf="showWinner" class="winner">
     <h1>Winner: {{podium[0]}}</h1>
     <h1>Loser: {{podium[1]}}</h1>
-    <h1>Score: {{score[0]}} - {{score[1]}}</h1>
+    <h1>{{player1.login}}: {{score[0]}}</h1>
+    <h1>{{player2.login}}: {{score[1]}} </h1>
 </div>
 <div class="wrapper">
     <div class="content">

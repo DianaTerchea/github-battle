@@ -7,12 +7,11 @@
             </mat-form-field>
         </form>
     </div>
-    <span *ngIf="error">There is no account with this username</span>
     <div *ngIf="show" class="info">
         <img src={{player.avatarUrl}}/>
-        <h3>{{player.login}}</h3>
-        <p>Followers: {{player.followers}}</p>
-        <p>Repos: {{player.publicRepos}}</p>
-        <p>Profile: <a href={{player.htmlUrl}}>{{player.htmlUrl}}</a></p>
+        <p><b>{{player.login}}</b></p>
+        <p><b>Followers:</b> {{player.followers}}</p>
+        <p><b>Repos: </b> <span>{{player.publicRepos}}</span></p>
+        <p><b>Profile: </b> <a href={{player.htmlUrl}}>{{player.htmlUrl}}</a></p>
     </div>
 </div>

@@ -18,6 +18,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {User} from './models';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { PlayerFormComponent } from './player-form/player-form.component';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,7 @@ import { PlayerFormComponent } from './player-form/player-form.component';
     FormsModule,
     MatProgressBarModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
 RouterModule.forRoot([
       {
         path: '',

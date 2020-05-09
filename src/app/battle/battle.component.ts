@@ -11,13 +11,11 @@ import { User, Stats } from '../models/user';
 export class BattleComponent implements OnInit {
   public player1: User = new User();
   public player2: User = new User();
-  public stats1: Stats[] = [];
-  public stats2: Stats[] = [];
   public score: number[] = [0, 0];
+  public podium: string[] = [];
   public show1 = false;
   public show2 = false;
   public showWinner = false;
-  public podium: string[] = [];
   constructor() { }
 
   ngOnInit(): void {
@@ -34,25 +32,31 @@ export class BattleComponent implements OnInit {
   }
 
   getStatsPlayer1(statistics) {
-    this.stats1.push(statistics);
-    this.computePlayer1Score();
+    this.computeScore(statistics, 'player1');
   }
 
   getStatsPlayer2(statistics) {
-    this.stats2.push(statistics);
-    this.computePlayer2Score();
+    this.computeScore(statistics, 'player2');
   }
 
-  computePlayer1Score() {
-    this.score[0] += this.player1.publicRepos + this.stats1[0].commits * 10 +  this.stats1[0].addition * 20;
-  }
-  computePlayer2Score() {
-    this.score[1] += this.player2.publicRepos + this.stats2[0].commits * 10 +  this.stats2[0].addition * 20;
+
+  computeScore(stats: Stats, player: string) {
+    if ( player === 'player1') {
+      this.score[0] += this.player1.publicRepos + stats.commits * 10 + stats.addition * 20 + stats.deletion * 5;
+      if (stats.commits === 0) {
+         this.score[0] -= 1000;
+      }
+    } else {
+      this.score[1] += this.player2.publicRepos + stats.commits * 10 + stats.addition * 20 + stats.deletion * 5;
+      if (stats.commits === 0) {
+         this.score[1] -= 1000;
+      }
+    }
   }
 
   battle() {
     console.log('Score: ' + this.score);
-    if (this.score[0] > this.score[1]) {
+    if (this.score[0]  > this.score[1]) {
       console.log('Winner' + this.player1.login);
       this.showWinner = true;
       this.podium[0] = this.player1.login;

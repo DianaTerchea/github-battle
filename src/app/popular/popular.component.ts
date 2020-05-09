@@ -13,18 +13,18 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 export class PopularComponent implements OnInit {
    public repos: Repo[] = [];
    public selectedType: Language = 'Typescript';
+   public types: Language[] = ['Typescript', 'JavaScript' , 'C++' , 'Java'];
    public isLoading = true;
    private subscription: Subscription;
   constructor(private getPopular: GetProfileService) { }
 
   ngOnInit(): void {
-    this.getRepos();
-
+    this.getRepos(this.selectedType);
     this.subscription = this.getPopular.isLoading$.subscribe((loading: boolean) => {
       this.isLoading = loading;
     });
   }
-  public getRepos(language: Language = 'Typescript'): void {
+  public getRepos(language: Language): void {
     this.selectedType = language;
     this.getPopular.getPopularRepos(language)
     .subscribe((data: Repo[]) => {

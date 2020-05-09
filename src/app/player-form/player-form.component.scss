@@ -1,7 +1,9 @@
 .content-player {
     border: 1px solid lightgray;
-    height: 50%;
-    width: 80%;
+    border-top: 30px solid lightgray;
+    border-radius: 10px;
+    height: 20vh;
+    width: 30vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,6 +13,12 @@
 form {
     width: 80%;
     height: 60%;
+    font-size: 20px;
+}
+
+span {
+    color: red;
+    font-size: 18px;
 }
 
 mat-form-field {
@@ -19,11 +27,17 @@ mat-form-field {
 
 .info {
     height: 60%;
+    p {
+        font-size: 18px;
+    }
+    span {
+        color: black;
+    }
 }
 
 img {
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     border-radius: 50%;
 }
 

@@ -24,8 +24,13 @@ h4 {
     font-weight: bold;
 }
 
-mat-radio-group {
-    margin-top: 5%;
+.button-area {
+    margin-top: 10px;
     display: flex;
     justify-content: space-evenly;
+}
+
+.wrapper {
+    width: 80%;
+    height: 100%;
 }
