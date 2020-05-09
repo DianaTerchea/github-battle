@@ -48,11 +48,16 @@ export class Repo {
 
 export class Stats {
     repoName: string;
-    addition: number[] = [];
-    deletion: number[] = [];
-    commits: number[] = [];
+    addition: number = 0;
+    deletion: number = 0;
+    commits: number = 0;
 
     constructor(repo: string) {
         this.repoName = repo;
     }
+}
+
+export class Player {
+    user: User;
+    stats: Stats[];
 }

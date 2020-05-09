@@ -48,13 +48,24 @@
 <div class="battle">
     <button *ngIf="show1&&show2" mat-raised-button (click)="battle()">Battle...</button>
 </div>-->
+<div *ngIf="showWinner" class="winner">
+    <h1>Winner: {{podium[0]}}</h1>
+    <h1>Loser: {{podium[1]}}</h1>
+    <h1>Score: {{score[0]}} - {{score[1]}}</h1>
+</div>
 <div class="wrapper">
     <div class="content">
         <h1>Player 1</h1>
-        <app-player-form></app-player-form>
+        <app-player-form (data)="getPlayer1Data($event)" (statistics)="getStatsPlayer1($event)"></app-player-form>
     </div>
     <div class="content">
         <h1>Player 2</h1>
-        <app-player-form></app-player-form>
+        <app-player-form (data)="getPlayer2Data($event)" (statistics)="getStatsPlayer2($event)"></app-player-form>
     </div>
+</div>
+<div class="battle">
+    <button *ngIf="show1&&show2" mat-raised-button (click)="battle()">Battle...</button>
+</div>
+<div class="battle">
+    <button *ngIf="!(show1&&show2)&&showWinner" mat-raised-button (click)="refresh()">New Battle</button>
 </div>

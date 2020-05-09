@@ -36,12 +36,11 @@ export class GetProfileService {
       const repos: string[] = [];
       const body = JSON.parse(JSON.stringify(res));
       /*daca user-ul are mai putin de 10 repo-uri le iau pe toate*/
-      if(body.length <= 10){
+      if (body.length <= 10) {
       for (i = 0; i < body.length; i++) {
         repos[i] = body[i].name;
-      }
-    }/*daca are mai mult de 10 le iau pe primele 10 pentru a limita nr de requesturi */
-    else{
+      } /*daca are mai mult de 10 le iau pe primele 10 pentru a limita nr de requesturi */
+    } else {
       for (i = 0; i < 9; i++) {
         repos[i] = body[i].name;
       }
@@ -55,9 +54,9 @@ export class GetProfileService {
       const stats = new Stats(repoName);
       const weeks = body[0].weeks;
       for ( i = 0; i < weeks.length; i++) {
-        stats.addition[i] = weeks[i].a;
-        stats.deletion[i] = weeks[i].d;
-        stats.commits[i] = weeks[i].c;
+        stats.addition += weeks[i].a;
+        stats.deletion += weeks[i].d;
+        stats.commits += weeks[i].c;
       }
       return stats;
     }
@@ -90,8 +89,8 @@ export class GetProfileService {
     );
  }
 
- public getStats(repoName: string): Observable<Stats> {
-  const url = `${this.repoApi}DianaTerchea/${repoName}/stats/contributors`;
+ public getStats(repoName: string, username: string): Observable<Stats> {
+  const url = `${this.repoApi}${username}/${repoName}/stats/contributors`;
   return this.http.get<any>(url, {headers : this.reqHeader}).pipe(
   catchError(this.handleError),
   map((res) => this.extractStats(res, repoName))

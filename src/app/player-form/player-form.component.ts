@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import {User, Stats} from '../models/user';
+import {User, Stats, Player} from '../models/user';
 import { GetProfileService } from '../services';
 import { delay } from 'rxjs/operators';
 @Component({
@@ -11,9 +11,10 @@ import { delay } from 'rxjs/operators';
 })
 export class PlayerFormComponent implements OnInit {
   myForm: FormGroup;
+  @Output() data: EventEmitter<User> = new EventEmitter();
+  @Output() statistics: EventEmitter<Stats> = new EventEmitter();
   public player: User = new User();
   public repos: string[] = [];
-  public stats: Stats[] = [];
   public show = false;
   public error = false;
   public score = 0;
@@ -37,6 +38,7 @@ export class PlayerFormComponent implements OnInit {
       this.player = data;
       this.show = true;
       this.error = false;
+      this.sendData(this.player);
     },
     err => {
      console.log('[Eroare]' + err);
@@ -48,30 +50,36 @@ export class PlayerFormComponent implements OnInit {
     this.request.getRepos(user)
     .subscribe( (data) => {
       this.repos = data;
-      this.getStats();
+      this.getStats(user);
     },
     err => {
      console.log('[Eroare din getRepos]' + err);
     });
   }
 
-  public getStats(): void {
+  public getStats(username: string): void {
     let i = 0;
     for ( i = 0; i < this.repos.length; i++) {
-    this.request.getStats(this.repos[i])
+    this.request.getStats(this.repos[i], username)
     .subscribe( (data) => {
-      this.stats[i] = data;
-      console.log(this.stats[i]);
+      this.sendStats(data);
     },
     err => {
      console.log('[Eroare din getStats]' + err);
     });
   }
   }
+  sendData(user: User) {
+    this.data.emit(user);
+  }
+  sendStats(stats: Stats) {
+    this.statistics.emit(stats);
+  }
 
-  computeScore() {
+ /* computeScore() {
     let i = 0;
     for ( i = 0; i < this.stats.length; i++) {
+      console.log('sunt aici');
       console.log(this.stats[i].commits[0]);
       //  const commits = this.computeSum(this.stats[i].commits);
       //  const addition = this.computeSum(this.stats[i].addition);
@@ -89,7 +97,7 @@ export class PlayerFormComponent implements OnInit {
      // tslint:disable-next-line: only-arrow-functions
      const total = sum.reduce( function(a, b) {return a + b; });
      return total;
-  }
+  }*/
 
 }
 
