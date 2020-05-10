@@ -1,7 +1,8 @@
 import { GetProfileService } from './../services/getProfile.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { User, Stats } from '../models/user';
 @Component({
   selector: 'app-battle',
@@ -16,11 +17,11 @@ export class BattleComponent implements OnInit {
   public show1 = false;
   public show2 = false;
   public showWinner = false;
+  public equality = false;
   constructor() { }
 
   ngOnInit(): void {
   }
-
   getPlayer1Data(data) {
     this.player1 = data;
     this.show1 = true;
@@ -63,13 +64,14 @@ export class BattleComponent implements OnInit {
       this.podium[1] = this.player2.login;
       this.show1 = false;
       this.show2 = false;
-    } else {
-      console.log('Winner' + this.player2.login);
+    } else if (this.score[0]  < this.score[1]) {
       this.showWinner = true;
       this.podium[0] = this.player2.login;
       this.podium[1] = this.player1.login;
       this.show1 = false;
       this.show2 = false;
+    } else {
+      this.equality = true;
     }
   }
 

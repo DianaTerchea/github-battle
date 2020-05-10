@@ -4,7 +4,11 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
-const MaterialsComponents = [MatButtonModule, MatToolbarModule, MatInputModule, MatFormFieldModule, MatRadioModule];
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
+const MaterialsComponents = [MatButtonModule, MatToolbarModule, MatInputModule, MatFormFieldModule, MatRadioModule,
+ MatSnackBarModule, MatProgressBarModule];
 
 @NgModule({
 

@@ -2,8 +2,13 @@
 <div *ngIf="showWinner" class="winner">
     <h1>Winner: {{podium[0]}}</h1>
     <h1>Loser: {{podium[1]}}</h1>
-    <h1>{{player1.login}}: {{score[0]}}</h1>
-    <h1>{{player2.login}}: {{score[1]}} </h1>
+    <h1>{{player1.login}}: {{score[0]}} puncte</h1>
+    <h1>{{player2.login}}: {{score[1]}} puncte</h1>
+</div>
+<div *ngIf="equality" class="winner">
+    <h1>Equality</h1>
+    <h1>{{player1.login}}: {{score[0]}} puncte</h1>
+    <h1>{{player2.login}}: {{score[1]}} puncte</h1>
 </div>
 <div class="wrapper">
     <div class="content">

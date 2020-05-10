@@ -10,12 +10,12 @@ export class User {
     followers: number;
     constructor() {}
 
-    setUserNameAndId(login: string, id: number){
+    setUserNameAndId(login: string, id: number) {
         this.login = login;
         this.id = id;
     }
 
-    setAvatarRepoAddressAndLink(avatar: string, address: string, link: string){
+    setAvatarRepoAddressAndLink(avatar: string, address: string, link: string) {
         this.avatarUrl = avatar;
         this.htmlUrl = address;
         this.reposUrl = link;
@@ -55,9 +55,4 @@ export class Stats {
     constructor(repo: string) {
         this.repoName = repo;
     }
-}
-
-export class Player {
-    user: User;
-    stats: Stats[];
 }

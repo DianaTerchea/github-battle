@@ -1,8 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MaterialModule } from './../material/material.module';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
-import {User, Stats, Player} from '../models/user';
+import { User, Stats } from '../models/user';
 import { GetProfileService } from '../services';
 
 @Component({
@@ -10,13 +12,14 @@ import { GetProfileService } from '../services';
   templateUrl: './player-form.component.html',
   styleUrls: ['./player-form.component.scss']
 })
-export class PlayerFormComponent implements OnInit {
+export class PlayerFormComponent implements OnInit, OnDestroy {
   myForm: FormGroup;
   @Output() data: EventEmitter<User> = new EventEmitter();
   @Output() statistics: EventEmitter<Stats> = new EventEmitter();
   public player: User = new User();
   public repos: string[] = [];
   public show = false;
+  public subscription: Subscription;
   constructor(private _snackBar: MatSnackBar, private fb: FormBuilder, private request: GetProfileService) { }
 
   ngOnInit(): void {
@@ -25,8 +28,11 @@ export class PlayerFormComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+  this.subscription.unsubscribe();
+  }
+
   onSubmitPlayer(form: FormGroup) {
-    console.log('submited form');
     this.getRepos(form.value.username);
     this.getInfo(form.value.username);
    }
@@ -45,7 +51,7 @@ export class PlayerFormComponent implements OnInit {
       this.sendData(this.player);
     },
     err => {
-     console.log('[Eroare]' + err);
+     console.log('[Eroare la getUser]' + err);
      this.openSnackBar('There is no account registered with this username', '');
     });
   }
@@ -57,7 +63,7 @@ export class PlayerFormComponent implements OnInit {
       this.getStats(user);
     },
     err => {
-     console.log('[Eroare din getRepos]' + err);
+     console.log('[Eroare din getRepos] ' + err);
     });
   }
 
@@ -69,7 +75,7 @@ export class PlayerFormComponent implements OnInit {
       this.sendStats(data);
     },
     err => {
-     console.log('[Eroare din getStats]' + err);
+     console.log('[Eroare din getStats] ' + err);
     });
   }
   }

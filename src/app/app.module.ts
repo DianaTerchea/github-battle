@@ -11,14 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { BattleComponent } from './battle/battle.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { PopularComponent } from './popular/popular.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {MatRadioModule} from '@angular/material/radio';
-import {User} from './models';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ReactiveFormsModule } from '@angular/forms';
 import { PlayerFormComponent } from './player-form/player-form.component';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -34,13 +30,9 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    MatRadioModule,
-    MatToolbarModule,
     HttpClientModule,
     FormsModule,
-    MatProgressBarModule,
     ReactiveFormsModule,
-    MatSnackBarModule,
 RouterModule.forRoot([
       {
         path: '',

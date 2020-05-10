@@ -3,7 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError, BehaviorSubject} from 'rxjs';
-import {catchError, tap, map, retry} from 'rxjs/operators';
+import {catchError, tap, map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -12,11 +12,11 @@ import {catchError, tap, map, retry} from 'rxjs/operators';
 export class GetProfileService {
   private readonly api: string = 'https://api.github.com/users/';
   private readonly repoApi: string = 'https://api.github.com/repos/';
-  private readonly popularApi: string = 'https://api.github.com/search/repositories?q=stars:%3E1&language:';
+  private readonly popularApi: string = 'https://api.github.com/search/repositories?q=stars:>=10000+language:';
   private readonly token: string = '5e03d1cde83454a1291da4d87c4a722c450b58c6';
-  private readonly reqHeader = new HttpHeaders({ 
+  private readonly reqHeader = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + this.token
+    Authorization: 'Bearer ' + this.token
  });
   public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   constructor(private http: HttpClient) {
@@ -35,14 +35,14 @@ export class GetProfileService {
       let i = 0;
       const repos: string[] = [];
       const body = JSON.parse(JSON.stringify(res));
-      /*daca user-ul are mai putin de 10 repo-uri le iau pe toate*/
+      /*daca user-ul are mai putin de 10 repo-uri publice le iau pe toate*/
       if (body.length <= 10) {
       for (i = 0; i < body.length; i++) {
-        repos[i] = body[i].name;
+        repos.push(body[i].name);
       } /*daca are mai mult de 10 le iau pe primele 10 pentru a limita nr de requesturi */
     } else {
       for (i = 0; i < 9; i++) {
-        repos[i] = body[i].name;
+        repos.push(body[i].name);
       }
     }
       return repos;
@@ -68,7 +68,7 @@ export class GetProfileService {
         const repo = new Repo(body.items[i].owner.login);
         repo.setAvatarAndRepos( body.items[i].owner.avatar_url, body.items[i].html_url)
         repo.setForks(body.items[i].forks_count);
-        repos[i] = repo;
+        repos.push(repo);
       }
       return repos;
     }

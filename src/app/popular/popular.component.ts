@@ -1,19 +1,17 @@
+import { MaterialModule } from './../material/material.module';
 import { GetProfileService } from './../services/getProfile.service';
-import { MatRadioModule } from '@angular/material/radio';
 import { Repo, Language } from './../models/user';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-popular',
   templateUrl: './popular.component.html',
   styleUrls: ['./popular.component.scss']
 })
-export class PopularComponent implements OnInit {
+export class PopularComponent implements OnInit, OnDestroy {
    public repos: Repo[] = [];
    public selectedType: Language = 'Typescript';
-   public types: Language[] = ['Typescript', 'JavaScript' , 'C++' , 'Java'];
    public isLoading = true;
    private subscription: Subscription;
   constructor(private getPopular: GetProfileService) { }
@@ -24,9 +22,13 @@ export class PopularComponent implements OnInit {
       this.isLoading = loading;
     });
   }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
   public getRepos(language: Language): void {
     this.selectedType = language;
-    this.getPopular.getPopularRepos(language)
+    this.getPopular.getPopularRepos(this.selectedType)
     .subscribe((data: Repo[]) => {
      this.repos = data;
     });
