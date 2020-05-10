@@ -72,6 +72,8 @@ export class BattleComponent implements OnInit {
       this.show2 = false;
     } else {
       this.equality = true;
+      this.show1 = false;
+      this.show2 = false;
     }
   }
 
